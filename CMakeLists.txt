@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.5)
 project(window)
 
 set(CMAKE_CXX_STANDARD 11)
@@ -7,7 +7,7 @@ set(SOURCE_FILES main.cpp)
 add_executable(window ${SOURCE_FILES})
 find_package(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
-find_package(glfw3 3.2 REQUIRED)
+find_package(glfw3 3.1 REQUIRED)
 
 set(SOURCE_FILES main.cpp)
 add_executable(window_executable ${SOURCE_FILES})
