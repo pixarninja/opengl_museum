@@ -7,7 +7,7 @@ set(SOURCE_FILES main.cpp)
 add_executable(window ${SOURCE_FILES})
 find_package(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
-find_package(glfw3 3.1 REQUIRED)
+find_package(glfw3 REQUIRED)
 
 set(SOURCE_FILES main.cpp)
 add_executable(window_executable ${SOURCE_FILES})

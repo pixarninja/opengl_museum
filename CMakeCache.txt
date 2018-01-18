@@ -171,6 +171,12 @@ GLEW_INCLUDE_DIR:PATH=/usr/include
 //Path to a library.
 GLEW_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libGLEW.so
 
+//Path to a library.
+GLFW3_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libglfw.so
+
+//The directory containing a CMake configuration file for GLFW.
+GLFW_DIR:PATH=GLFW_DIR-NOTFOUND
+
 //Path to a file.
 OPENGL_INCLUDE_DIR:PATH=/usr/include
 
@@ -184,7 +190,7 @@ OPENGL_glu_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libGLU.so
 OPENGL_xmesa_INCLUDE_DIR:PATH=OPENGL_xmesa_INCLUDE_DIR-NOTFOUND
 
 //The directory containing a CMake configuration file for glfw3.
-glfw3_DIR:PATH=glfw3_DIR-NOTFOUND
+glfw3_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/glfw3
 
 //Value Computed by CMake
 window_BINARY_DIR:STATIC=/home/pixarninja/Git/opengl_museum

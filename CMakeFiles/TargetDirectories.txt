@@ -1,0 +1,4 @@
+/home/pixarninja/Git/opengl_museum/CMakeFiles/edit_cache.dir
+/home/pixarninja/Git/opengl_museum/CMakeFiles/rebuild_cache.dir
+/home/pixarninja/Git/opengl_museum/CMakeFiles/window_executable.dir
+/home/pixarninja/Git/opengl_museum/CMakeFiles/window.dir
