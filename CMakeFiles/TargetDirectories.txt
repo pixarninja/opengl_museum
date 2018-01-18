@@ -1,4 +1,0 @@
-/home/zach/Git/NMT/3D-Graphics/opengl_museum/CMakeFiles/rebuild_cache.dir
-/home/zach/Git/NMT/3D-Graphics/opengl_museum/CMakeFiles/edit_cache.dir
-/home/zach/Git/NMT/3D-Graphics/opengl_museum/CMakeFiles/window_executable.dir
-/home/zach/Git/NMT/3D-Graphics/opengl_museum/CMakeFiles/window.dir
