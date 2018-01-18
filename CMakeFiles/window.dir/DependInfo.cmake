@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/pixarninja/Git/opengl_museum/main.cpp" "/home/pixarninja/Git/opengl_museum/CMakeFiles/window.dir/main.cpp.o"
+  "/home/zach/Git/NMT/3D-Graphics/opengl_museum/main.cpp" "/home/zach/Git/NMT/3D-Graphics/opengl_museum/CMakeFiles/window.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

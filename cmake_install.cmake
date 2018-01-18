@@ -1,4 +1,4 @@
-# Install script for directory: /home/pixarninja/Git/opengl_museum
+# Install script for directory: /home/zach/Git/NMT/3D-Graphics/opengl_museum
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/pixarninja/Git/opengl_museum/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/zach/Git/NMT/3D-Graphics/opengl_museum/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
