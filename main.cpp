@@ -1,7 +1,17 @@
 #include <iostream>
-#include<GL/glew.h>
-#include<GLFW/glfw3.h>
-#include<GLM/glm.hpp>
+// Include standard headers
+#include <stdio.h>
+#include <stdlib.h>
+
+// Include GLEW.  Always include it bofore gl.h, and glfw.h ... its a little magic
+#include <GL/glew.h>
+
+// include GLFW
+#include <GLFW/glfw3.h>
+
+// Include GLM.
+// We don't need it yet, but it is a library for 3D maths
+#include <glm/glm.hpp>
 
 void render(double currentTime) {
     const GLfloat color[] = {1.0f, 0.0f, 0.0f, 1.0f};
