@@ -12,5 +12,4 @@ Makefile
 cmake-build-debug/
 
 # Glitter ignore
-Glitter/
 lib/
