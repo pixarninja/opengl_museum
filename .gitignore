@@ -10,3 +10,7 @@ Makefile
 # CLion files
 .idea/
 cmake-build-debug/
+
+# Glitter ignore
+Glitter/
+lib/
