@@ -17,8 +17,8 @@ Task 2: uncomment line 123 to draw in wireframe polygons.
 ### Museum Plan
 
 1. The theme for our museum will be "Rick And Morty".
-2. The museum will have _ rooms.
-3. We would like to incorporate parts of the show into the museum building. Perhaps some of the floors and walls could represent Rick's garage, and others could represent Morty's classroom, etc. We could either get those textures from screenshotting the show itself, or by replicating them with PhotoShop.
+2. The museum will have 5 rooms consisting of the family's house.
+3. We would like to incorporate parts of the show into the museum building. Perhaps some of the floors and walls could represent Rick's garage, and others could represent the living room, etc. We could either get those textures from screenshotting the show itself, or by replicating them with PhotoShop.
 4. We plan for the museum to have a ceiling, however for one or two rooms it might be appropriate to remove the ceiling or create one that is not a regular ceiling shape.
-5. We sould like to at least use a model of Rick's space ship as a sculpture. Other sculptures could include Rick's portal gun or other props from the show.
-6. For our paintings we would like to use the pictures from Rick and Morty's house, such as Snuffles or family photos. We were also thinking of making "cardboard" cutouts of the Sanchez family and using those as "paintings" as well.
+5. We would like to at least use a model of Rick's space ship as a sculpture. Other sculptures could include Rick's portal gun or other props from the show. We will model their spaceship in blender and use texture painting to make it realistic.
+6. For our paintings we would like to use the pictures from Rick and Morty's house, such as Snuffles and family photos. We were also thinking of making "cardboard" cutouts of the Sanchez family and using those as "paintings" as well.
