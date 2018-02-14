@@ -5,41 +5,41 @@
 		<Option title="window"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\..\usr\;CMake Files\..\..\..\..\..\..\..\usr\lib\;CMake Files\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\;CMake Files\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\;CMake Files\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\glfw3\;"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\usr\;CMake Files\..\..\..\..\..\..\usr\lib\;CMake Files\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\;CMake Files\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\;CMake Files\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\glfw3\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project"/>
+				<Option working_dir="/home/jzharris/Git/3D-Graphics/opengl_museum/first_project"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j12 -f &quot;/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j12 -f &quot;/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j12 -f &quot;/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project"/>
+				<Option working_dir="/home/jzharris/Git/3D-Graphics/opengl_museum/first_project"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j12 -f &quot;/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j12 -f &quot;/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j12 -f &quot;/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project"/>
+				<Option working_dir="/home/jzharris/Git/3D-Graphics/opengl_museum/first_project"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j12 -f &quot;/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j12 -f &quot;/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j12 -f &quot;/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="window_executable">
-				<Option output="/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/window_executable" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project"/>
+				<Option output="/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/window_executable" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jzharris/Git/3D-Graphics/opengl_museum/first_project"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -54,15 +54,15 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j12 -f &quot;/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 window_executable"/>
-					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j12 -f &quot;/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j12 -f &quot;/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 window_executable"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="window_executable/fast">
-				<Option output="/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/window_executable" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project"/>
+				<Option output="/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/window_executable" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jzharris/Git/3D-Graphics/opengl_museum/first_project"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -77,15 +77,15 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j12 -f &quot;/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 window_executable/fast"/>
-					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j12 -f &quot;/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j12 -f &quot;/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 window_executable/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="window">
-				<Option output="/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/window" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project"/>
+				<Option output="/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/window" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jzharris/Git/3D-Graphics/opengl_museum/first_project"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -100,15 +100,15 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j12 -f &quot;/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 window"/>
-					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j12 -f &quot;/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j12 -f &quot;/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 window"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="window/fast">
-				<Option output="/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/window" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project"/>
+				<Option output="/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/window" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jzharris/Git/3D-Graphics/opengl_museum/first_project"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -123,25 +123,25 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j12 -f &quot;/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 window/fast"/>
-					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j12 -f &quot;/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j12 -f &quot;/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 window/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/main.cpp">
+		<Unit filename="/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/main.cpp">
 			<Option target="window_executable"/>
 			<Option target="window"/>
 		</Unit>
-		<Unit filename="/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/CMakeLists.txt">
+		<Unit filename="/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
-		<Unit filename="/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/../../../../../../../usr/lib/x86_64-linux-gnu/cmake/glfw3/glfw3ConfigVersion.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\glfw3\"/>
+		<Unit filename="/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/../../../../../../usr/lib/x86_64-linux-gnu/cmake/glfw3/glfw3ConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\glfw3\"/>
 		</Unit>
-		<Unit filename="/home/zach/Git/NMT/3D-Graphics/opengl_museum/first_project/../../../../../../../usr/lib/x86_64-linux-gnu/cmake/glfw3/glfw3Config.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\glfw3\"/>
+		<Unit filename="/home/jzharris/Git/3D-Graphics/opengl_museum/first_project/../../../../../../usr/lib/x86_64-linux-gnu/cmake/glfw3/glfw3Config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\glfw3\"/>
 		</Unit>
 	</Project>
 </CodeBlocks_project_file>

@@ -1,0 +1,2 @@
+# Need this package for OpenGL to run in kde:
+sudo apt-get install kdelibs5-dev
