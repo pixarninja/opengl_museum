@@ -7,7 +7,8 @@
 
 #pragma once
 #include <string>
-#include <GL/glew.h>
+//#include <GL/glew.h>
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include <fstream>
@@ -25,16 +26,18 @@ public:
 	Object(std::string fileName);
 	void load(GLuint &program);
 	void draw();
-	void getObjInfo(std::string fileName);
+	void getObjInfo();
+	int initVertArray(float **vertexArray);
 	~Object();
+
+    std::vector<glm::vec4> vertList;
 
 private:
 	int numVert;
 	int numNorm;
 	int numFaces;
 	int numIndex;
-	
-	std::vector<glm::vec4> vertList;
+
 	std::vector<glm::vec4> tempVertList;
 	std::vector<glm::vec4> normList;
 	std::vector<GLuint> vertexIndex;
