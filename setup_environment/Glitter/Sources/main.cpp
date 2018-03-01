@@ -37,7 +37,7 @@ int main(){
 
     // glfw window creation
     // --------------------
-    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Harris_Harris Object Loader", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(500 /*SCR_WIDTH*/, 500 /*SCR_HEIGHT*/, "Harris_Harris Object Loader", nullptr, nullptr);
     if(window == nullptr){
         std::cout << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
@@ -119,7 +119,7 @@ int main(){
 
     glEnableVertexAttribArray(0);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
     // You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
     // VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
@@ -170,6 +170,15 @@ int main(){
 void processInput(GLFWwindow* window){
     if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS){
         glfwSetWindowShouldClose(window, true);
+    }
+    if(glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS) {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    }
+    if(glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS) {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    }
+    if(glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS) {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
     }
 }
 
