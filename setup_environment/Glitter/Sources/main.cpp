@@ -80,7 +80,7 @@ int main(){
         std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
     }
     // link shaders
-    int shaderProgram = glCreateProgram();
+    GLuint shaderProgram = glCreateProgram();
     glAttachShader(shaderProgram, vertexShader);
     glAttachShader(shaderProgram, fragmentShader);
     glLinkProgram(shaderProgram);
@@ -101,25 +101,11 @@ int main(){
     int numVertices = object.initVertArray(&vertices);
     std::cout << numVertices << std::endl;
 
-    /*float vertices[] = {
-            -0.5f, -0.5f, 0.0f, // left
-            0.5f, -0.5f, 0.0f, // right
-            0.0f,  0.5f, 0.0f  // top
-    };
-    int numVertices = 3;*/
-
     std::cout << "vertices[] = {" << std::endl;
     for(int i = 0; i < numVertices * 3; i += 3) {
         std::cout << i / 3 << ": " << vertices[i] << ", " << vertices[i + 1] << ", " << vertices[i + 2] << std::endl;
     }
     std::cout << "}" << std::endl;
-
-    /*float vertices[] = {
-            -0.5f, -0.5f, 0.0f, // left
-            0.5f, -0.5f, 0.0f, // right
-            0.0f,  0.5f, 0.0f  // top
-    };
-    int numVertices = 3;*/
 
     unsigned int VBO, VAO;
     glGenVertexArrays(1, &VAO);
@@ -128,11 +114,12 @@ int main(){
     glGenBuffers(1, &VBO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
-    glBufferData(GL_ARRAY_BUFFER, numVertices * sizeof(GLfloat[3]), vertices, GL_STATIC_DRAW);
+    //glBufferData(GL_ARRAY_BUFFER, numVertices * sizeof(GLfloat[3]), vertices, GL_STATIC_DRAW);
+    object.load(shaderProgram);
 
     glEnableVertexAttribArray(0);
 
-    glVertexAttribPointer(0, numVertices, GL_FLOAT, GL_FALSE, 0, (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
     // You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
     // VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
@@ -157,7 +144,8 @@ int main(){
         // draw our first triangle
         glUseProgram(shaderProgram);
         glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-        glDrawArrays(GL_TRIANGLES, 0, numVertices);
+        object.draw();
+        //glDrawArrays(GL_TRIANGLES, 0, numVertices);
         // glBindVertexArray(0); // no need to unbind it every time
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
