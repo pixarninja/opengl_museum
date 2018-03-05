@@ -28,3 +28,9 @@ Task 2: Uncomment line 123 to draw in wireframe polygons.
 Task 1: Create the initial outline for the museum. Show how the rooms will be laid out.
 
 ![alt text](https://github.com/pixarninja/opengl_museum/blob/master/Blender_Files/first_cut.png)
+
+### 3/5/2018: Second cut of the museum
+
+Task 1: Add models to existing museum.
+
+![alt_text](https://github.com/pixarninja/opengl_museum/blob/master/Blender_Files/second_cut.png)
