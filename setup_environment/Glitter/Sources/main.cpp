@@ -96,6 +96,8 @@ int main(){
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
     GLfloat *vertices;
+    //Zach's dir: "/home/jzharris/Git/3D-Graphics/opengl_museum/setup_environment/Glitter/Sources/cube.obj"
+    //Wes's dir: "/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Sources/cube.obj"
     Object object("/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Sources/cube.obj");
     object.getObjInfo();
     int numVertices = object.initVertArray(&vertices);
