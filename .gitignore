@@ -13,3 +13,4 @@ cmake-build-debug/
 
 # Glitter ignore
 lib/
+setup_environment/setup_environment/setup_environment
