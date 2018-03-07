@@ -40,3 +40,9 @@ Task 1: Add models to existing museum.
 Task 1: Create an object loader that imports an object into OpenGL. The object rotates on any of the X, Y, or Z axes, controlled by mouseclicks.
 
 ![object_loader](https://github.com/pixarninja/opengl_museum/blob/master/setup_environment/screenshots/ObjectLoader.png)
+
+Task 2: Import a more complicated file. We chose to upload the obj file of our basic museum, and a model of a pikachu. We cycle through the files using the space bar.
+
+![object_loader](https://github.com/pixarninja/opengl_museum/blob/master/setup_environment/screenshots/ObjectLoaderMuseum.png)
+
+![object_loader](https://github.com/pixarninja/opengl_museum/blob/master/setup_environment/screenshots/ObjectLoaderPikachu.png)
