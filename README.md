@@ -39,4 +39,4 @@ Task 1: Add models to existing museum.
 
 Task 1: Create an object loader that imports an object into OpenGL. The object rotates on any of the X, Y, or Z axes, controlled by mouseclicks.
 
-![object_loader](https://github.com/pixarninja/opengl_museum/blob/master/Blender_Files/object_viewer.jpg)
+![object_loader](https://github.com/pixarninja/opengl_museum/blob/master/setup_environment/screenshots/ObjectLoader.png)
