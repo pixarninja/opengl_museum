@@ -27,16 +27,16 @@ Task 2: Uncomment line 123 to draw in wireframe polygons.
 
 Task 1: Create the initial outline for the museum. Show how the rooms will be laid out.
 
-![alt text](https://github.com/pixarninja/opengl_museum/blob/master/Blender_Files/first_cut.png)
+![first_cut](https://github.com/pixarninja/opengl_museum/blob/master/Blender_Files/first_cut.png)
 
 ### 3/5/2018: Second cut of the museum
 
 Task 1: Add models to existing museum.
 
-![alt_text](https://github.com/pixarninja/opengl_museum/blob/master/Blender_Files/second_cut.png)
+![second_cut](https://github.com/pixarninja/opengl_museum/blob/master/Blender_Files/second_cut.png)
 
 ### 3/7/2018: Final Object Loader
 
 Task 1: Create an object loader that imports an object into OpenGL. The object rotates on any of the X, Y, or Z axes, controlled by mouseclicks.
 
-![alt_text](https://github.com/pixarninja/opengl_museum/blob/master/Blender_Files/object_viewer.png)
+![object_loader](https://github.com/pixarninja/opengl_museum/blob/master/Blender_Files/object_viewer.jpg)
