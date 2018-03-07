@@ -34,3 +34,9 @@ Task 1: Create the initial outline for the museum. Show how the rooms will be la
 Task 1: Add models to existing museum.
 
 ![alt_text](https://github.com/pixarninja/opengl_museum/blob/master/Blender_Files/second_cut.png)
+
+### 3/7/2018: Final Object Loader
+
+Task 1: Create an object loader that imports an object into OpenGL. The object rotates on any of the X, Y, or Z axes, controlled by mouseclicks.
+
+![alt_text](https://github.com/pixarninja/opengl_museum/blob/master/Blender_Files/object_viewer.png)
