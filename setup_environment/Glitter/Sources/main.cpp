@@ -7,7 +7,11 @@
               able to dynamically switch between your simple loaded objects.
 ******************************************************************************/
 
-#include "Object.h"
+#include "camera.h"
+#include "mesh.h"
+#include "model.h"
+#include "object.h"
+#include "shader.h"
 
 /******************************************************************************
 
@@ -15,42 +19,9 @@
 
 ******************************************************************************/
 
-const char *vertexShaderSource = "#version 330\n"
-        "in vec4 vPosition;\n"
-        "in vec4 vColor;\n"
-        "out vec4 color;\n"
-        "uniform vec3 theta;\n"
-        "void main()\n"
-        "{\n"
-        "   //Compute the sines and cosines of theta for each of\n"
-        "   //the three axes in one computation.\n"
-        "   vec3 angles = radians(theta);\n"
-        "   vec3 c = cos(angles);\n"
-        "   vec3 s = sin(angles);\n"
-        "   //Remember: these matrices are column major.\n"
-        "   mat4 rx = mat4(1.0, 0.0, 0.0, 0.0,\n"
-        "                  0.0, c.x, s.x, 0.0,\n"
-        "                  0.0, -s.x, c.x, 0.0,\n"
-        "                  0.0, 0.0, 0.0, 1.0);\n"
-        "   mat4 ry = mat4(c.y, 0.0, -s.y, 0.0,\n"
-        "                  0.0, 1.0, 0.0, 0.0,\n"
-        "                  s.y, 0.0, c.y, 0.0,\n"
-        "                  0.0, 0.0, 0.0, 1.0);\n"
-        "   mat4 rz = mat4(c.z, -s.z, 0.0, 0.0,\n"
-        "                  s.z, c.z, 0.0, 0.0,\n"
-        "                  0.0, 0.0, 1.0, 0.0,\n"
-        "                  0.0, 0.0, 0.0, 1.0);\n"
-        "   color = vColor * 1.5;\n"
-        "   gl_Position = rz * ry * rx * vPosition;\n"
-        "}\0";
-
-const char *fragmentShaderSource = "#version 330\n"
-        "in vec4 color;\n"
-        "out vec4 fColor;\n"
-        "void main()\n"
-        "{\n"
-        "   fColor = color;\n"
-        "}\n\0";
+const char *vertexShaderSource = "/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Sources/vertex.shader";
+const char *fragmentShaderSource = "/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Sources/fragment.shader";
+const char *modelSource = "/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Sources/pikachu.obj";
 
 /******************************************************************************
 
@@ -62,22 +33,17 @@ const char *fragmentShaderSource = "#version 330\n"
 enum { Xaxis = 0, Yaxis = 1, Zaxis = 2, NumAxes = 3 };
 int Axis = Xaxis;
 
-const int NUM_MODELS = 2;
-
 GLfloat Theta[NumAxes] = { 0.0, 0.0, 0.0 };
-Object objects[NUM_MODELS] = {
-        std::string("/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Sources/cube.obj"),
-        std::string("/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Sources/first_cut.obj")
-};
-GLuint vao[NUM_MODELS];
-int modelSelection = 0;
+GLuint vao;
+Shader shader;
+Model model;
 
 // the location of the "theta" shader uniform variable
 GLint theta;
 
 // set up our window size
-const unsigned int SCR_WIDTH = 700;
-const unsigned int SCR_HEIGHT = 700;
+const unsigned int SCR_WIDTH = 500;
+const unsigned int SCR_HEIGHT = 500;
 
 /******************************************************************************
 
@@ -86,64 +52,17 @@ const unsigned int SCR_HEIGHT = 700;
 ******************************************************************************/
 void init() {
     // create a vertex array object (vao)
-    glGenVertexArrays(NUM_MODELS, vao);
+    glGenVertexArrays(1, &vao);
 
-    // Build and compile our shader program
-    // ---------- Vertex Shader -----------
-    GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertexShader, 1, &vertexShaderSource, nullptr);
-    glCompileShader(vertexShader);
-    // check for shader compile errors
-    int success;
-    char infoLog[512];
-    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-    if(!success){
-        glGetShaderInfoLog(vertexShader, 512, nullptr, infoLog);
-        std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n"
-                  << infoLog << std::endl;
-    }
+    // initialize and use the shader we initialized globally
+    shader.create(vertexShaderSource, fragmentShaderSource);
+    shader.use();
 
-    // ---------- Fragment Shader ----------
-    GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragmentShader, 1, &fragmentShaderSource, nullptr);
-    glCompileShader(fragmentShader);
-    // check for shader compile errors
-    glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
-    if (!success)
-    {
-        glGetShaderInfoLog(fragmentShader, 512, nullptr, infoLog);
-        std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n"
-                  << infoLog << std::endl;
-    }
+    // do the same for the model
+    model.create(modelSource);
 
-    // Link the shaders to the program
-    GLuint program = glCreateProgram();
-    glAttachShader(program, vertexShader);
-    glAttachShader(program, fragmentShader);
-    glLinkProgram(program);
-    // check for linking errors
-    glGetProgramiv(program, GL_LINK_STATUS, &success);
-    if(!success){
-        glGetProgramInfoLog(program, 512, nullptr, infoLog);
-        std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED.\n"
-                  << infoLog << std::endl;
-    }
-
-    // now lets get rid of the shaders since
-    // we have linked them to the program
-    glDeleteShader(vertexShader);
-    glDeleteShader(fragmentShader);
-
-    // now let's link all this stuff up to our VAO
-    // and prep to display our objects
-    glUseProgram(program);
-    for(int i = 0; i < NUM_MODELS; i++){
-        glBindVertexArray(vao[i]);
-        objects[i].load(program);
-    }
-
-    glBindVertexArray(vao[0]);
-    theta = glGetUniformLocation(program, "theta");
+    glBindVertexArray(vao);
+    theta = glGetUniformLocation(shader.ID, "theta");
 
     glEnable(GL_DEPTH_TEST);
     glClearColor(1.0, 1.0, 1.0,1.0);
@@ -160,7 +79,7 @@ void display() {
     glUniform3fv(theta, 1, Theta);
 
     // draw the currently loaded model
-    objects[modelSelection].draw();
+    model.draw(shader);
 } // end display()
 
 /******************************************************************************
@@ -172,10 +91,6 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 {
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         exit(EXIT_SUCCESS);
-    if (key == GLFW_KEY_SPACE && action == GLFW_PRESS) {
-        modelSelection = (modelSelection + 1) % NUM_MODELS;
-        glBindVertexArray(vao[modelSelection]);
-    }
 } // end key_callback()
 
 /******************************************************************************
@@ -199,7 +114,7 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 
 ******************************************************************************/
 void idle() {
-    Theta[Axis] += 1.0; // might try using 0.01 intervals
+    Theta[Axis] += 0.5; // might try using 0.01 intervals
 
     if (Theta[Axis] > 360.0) {
         Theta[Axis] -= 360.0;
