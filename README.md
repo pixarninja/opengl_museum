@@ -52,3 +52,9 @@ Task 2: Import a more complicated file. We chose to upload the obj file of our b
 Task 1: Implement a driver using the classes provided to us. This is now complete, and a sample rendering of an object loaded in with the new driver is produced below.
 
 ![driver](https://github.com/pixarninja/opengl_museum/blob/master/setup_environment/screenshots/Driver.png)
+
+### 4/4/2018: Integrate Textures
+
+Task 1: Add textures to the objects imported into OpenGL. We haven't perfected this yet, however we've managed to at least get the textures imported. Our next task is to ensure that the texture coordinates are being read correctly so that when we map textures on our museum, the UV coordinates match with how they are read in.
+
+![awkward_rock](https://github.com/pixarninja/opengl_museum/blob/master/setup_environment/screenshots/AwkwardRock.jpg)
