@@ -1,7 +1,8 @@
-#version 330
-in vec4 color;
-out vec4 fColor;
-void main()
-{
-   fColor = color;
+#version 330 core
+uniform sampler2D tex; // texture
+in vec2 fragTexCoord; // texture coord
+out vec4 color; // output color of the pixel
+
+void main() {
+    color = texture(tex, fragTexCoord);
 }

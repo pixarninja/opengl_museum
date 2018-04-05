@@ -21,7 +21,7 @@
 
 const char *vertexShaderSource = "/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Sources/vertex.shader";
 const char *fragmentShaderSource = "/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Sources/fragment.shader";
-const char *modelSource = "/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Sources/pikachu.obj";
+const char *modelSource = "/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Sources/cube2_sub_disp.obj";
 
 /******************************************************************************
 
@@ -37,6 +37,7 @@ GLfloat Theta[NumAxes] = { 0.0, 0.0, 0.0 };
 GLuint vao;
 Shader shader;
 Model model;
+Texture* gTexture = NULL;
 
 // the location of the "theta" shader uniform variable
 GLint theta;

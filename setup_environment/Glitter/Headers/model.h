@@ -137,7 +137,7 @@ private:
             vertex.Bitangent = vector;
             vertices.push_back(vertex);
         }
-        // now wak through each of the mesh's faces (a face is a mesh its triangle) and retrieve the corresponding vertex indices.
+        // now walk through each of the mesh's faces (a face is a mesh its triangle) and retrieve the corresponding vertex indices.
         for(unsigned int i = 0; i < mesh->mNumFaces; i++)
         {
             aiFace face = mesh->mFaces[i];
@@ -146,26 +146,28 @@ private:
                 indices.push_back(face.mIndices[j]);
         }
         // process materials
-        aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];    
-        // we assume a convention for sampler names in the shaders. Each diffuse texture should be named
-        // as 'texture_diffuseN' where N is a sequential number ranging from 1 to MAX_SAMPLER_NUMBER. 
-        // Same applies to other texture as the following list summarizes:
-        // diffuse: texture_diffuseN
-        // specular: texture_specularN
-        // normal: texture_normalN
+        if(mesh->mMaterialIndex >= 0) {
+            aiMaterial *material = scene->mMaterials[mesh->mMaterialIndex];
+            // we assume a convention for sampler names in the shaders. Each diffuse texture should be named
+            // as 'texture_diffuseN' where N is a sequential number ranging from 1 to MAX_SAMPLER_NUMBER.
+            // Same applies to other texture as the following list summarizes:
+            // diffuse: texture_diffuseN
+            // specular: texture_specularN
+            // normal: texture_normalN
 
-        // 1. diffuse maps
-        vector<Texture> diffuseMaps = loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
-        textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
-        // 2. specular maps
-        vector<Texture> specularMaps = loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
-        textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
-        // 3. normal maps
-        std::vector<Texture> normalMaps = loadMaterialTextures(material, aiTextureType_HEIGHT, "texture_normal");
-        textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
-        // 4. height maps
-        std::vector<Texture> heightMaps = loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height");
-        textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
+            // 1. diffuse maps
+            vector<Texture> diffuseMaps = loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
+            textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
+            // 2. specular maps
+            vector<Texture> specularMaps = loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
+            textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
+            // 3. normal maps
+            std::vector<Texture> normalMaps = loadMaterialTextures(material, aiTextureType_HEIGHT, "texture_normal");
+            textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
+            // 4. height maps
+            std::vector<Texture> heightMaps = loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height");
+            textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
+        }
         
         // return a mesh object created from the extracted mesh data
         return Mesh(vertices, indices, textures);
@@ -175,6 +177,18 @@ private:
     // ------------------------------------------------------------------------
     vector<Texture> loadMaterialTextures(aiMaterial *mat, aiTextureType type, string typeName)
     {
+        for (unsigned int i = 0; i < mat->mNumProperties;++i) {
+            aiMaterialProperty* prop = mat->mProperties[i];
+            char *mData = prop->mData;
+
+            if ( prop /* just a sanity check ... */
+                 && 0 == strcmp( prop->mKey.data, _AI_MATKEY_TEXTURE_BASE )
+                 && prop->mSemantic == type) {
+                ;
+            }
+        }
+
+
         vector<Texture> textures;
         for(unsigned int i = 0; i < mat->GetTextureCount(type); i++)
         {
