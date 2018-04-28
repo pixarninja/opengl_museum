@@ -20,7 +20,7 @@
 
 const char *vertexShaderSource = "/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Sources/vertex.shader";
 const char *fragmentShaderSource = "/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Sources/fragment.shader";
-const char *modelSource = "/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Sources/cube2_sub_disp.obj";
+const char *modelSource = "/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Sources/cube3.obj";
 
 /******************************************************************************
 	GLOBAL VARIABLES
@@ -107,7 +107,8 @@ static void cursorPositionCallback( GLFWwindow *window, double xpos, double ypos
 
 void scrollCallback( GLFWwindow *window, double xoffset, double yoffset )
 {
-    std::cout << xoffset << " : " << yoffset << std::endl;
+    std::cout << yoffset << std::endl;
+    camera.ProcessMouseScroll(yoffset);
 }
 
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
@@ -220,13 +221,13 @@ int main(){
     camera = Camera();
 
     float fov = 90.f;
-    float nearPlane = 0.1f;
-    float farPlane = 1000.f;
+    float nearPlane = 1.0f;
+    float farPlane = 100.f;
     glm::mat4 ProjectionMatrix(1.f);
 
     ProjectionMatrix = glm::perspective(
-            glm::radians(fov),
-            static_cast<float>(framebufferWidth) / framebufferHeight,
+            glm::radians(camera.Zoom),
+            (float) SCR_WIDTH / (float) SCR_HEIGHT,
             nearPlane,
             farPlane
     );
@@ -237,6 +238,8 @@ int main(){
     //glUniformMatrix4fv(glGetUniformLocation(vao, "model"), 1, GL_FALSE, glm::value_ptr(ModelMatrix));
     glUniformMatrix4fv(glGetUniformLocation(vao, "view"), 1, GL_FALSE, glm::value_ptr(camera.GetViewMatrix()));
     glUniformMatrix4fv(glGetUniformLocation(vao, "proj"), 1, GL_FALSE, glm::value_ptr(ProjectionMatrix));
+
+    cout << camera.GetViewMatrix()[0][0] << endl;
 
     // glfw uses a "closed event" loop, which means you only have to handle
     // events when you need to
@@ -254,21 +257,4 @@ int main(){
     // -----------------------------------------------------------------------
     glfwTerminate();
     return 0;
-}
-
-// process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
-// ---------------------------------------------------------------------------------------------------------
-void processInput(GLFWwindow* window){
-    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS){
-        glfwSetWindowShouldClose(window, true);
-    }
-    if(glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS) {
-        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    }
-    if(glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS) {
-        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    }
-    if(glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS) {
-        glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
-    }
 }
