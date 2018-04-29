@@ -8,9 +8,6 @@
 
 #include <vector>
 
-int xlast = 0;
-int ylast = 0;
-
 // Defines several possible options for camera movement. Used as abstraction to stay away from window-system specific input methods
 enum Camera_Movement {
     FORWARD,
@@ -22,8 +19,8 @@ enum Camera_Movement {
 // Default camera values
 const float YAW         = -90.0f;
 const float PITCH       =  0.0f;
-const float SPEED       =  2.5f;
-const float SENSITIVITY =  0.1f;
+const float SPEED       =  1.0f;
+const float SENSITIVITY =  1.0f;
 const float ZOOM        =  45.0f;
 
 
@@ -90,10 +87,8 @@ public:
         xoffset *= MouseSensitivity;
         yoffset *= MouseSensitivity;
 
-        Yaw   += xoffset - xlast;
-        xlast = xoffset;
-        Pitch += yoffset - ylast;
-        ylast = yoffset;
+        Yaw   += xoffset;
+        Pitch += yoffset;
 
         // Make sure that when pitch is out of bounds, screen doesn't get flipped
         if (constrainPitch)
