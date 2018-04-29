@@ -95,6 +95,7 @@ private:
         vector<Texture> textures;
 
         // Walk through each of the mesh's vertices
+        std::cout << mesh->mNumVertices << std::endl;
         for(unsigned int i = 0; i < mesh->mNumVertices; i++)
         {
             Vertex vertex;
@@ -121,6 +122,9 @@ private:
             }
             else
                 vertex.TexCoords = glm::vec2(0.0f, 0.0f);
+            std::cout << vertex.TexCoords.x << ", " << vertex.TexCoords.y << std::endl;
+            std::cout << vertex.Position.x << ", " << vertex.Position.y << ", " << vertex.Position.z << std::endl;
+            std::cout << vertex.Normal.x << ", " << vertex.Normal.y << ", " << vertex.Normal.z << std::endl;
             // tangent
             vector.x = mesh->mTangents[i].x;
             vector.y = mesh->mTangents[i].y;
@@ -133,6 +137,7 @@ private:
             vertex.Bitangent = vector;
             vertices.push_back(vertex);
         }
+        std::cout << vertices.size() << std::endl;
         // now wak through each of the mesh's faces (a face is a mesh its triangle) and retrieve the corresponding vertex indices.
         for(unsigned int i = 0; i < mesh->mNumFaces; i++)
         {
@@ -223,6 +228,7 @@ unsigned int TextureFromFile(const char *path, const string &directory, bool gam
             format = GL_RGBA;
 
         glBindTexture(GL_TEXTURE_2D, textureID);
+        std::cout << width << ", " << height << std::endl;
         glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
 

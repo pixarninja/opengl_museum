@@ -18,9 +18,9 @@
 	Shader Set-up
 ******************************************************************************/
 
-const char *vertexShaderSource = "/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Sources/vertex.shader";
-const char *fragmentShaderSource = "/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Sources/fragment.shader";
-const char *modelSource = "/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Sources/cube3.obj";
+const char *vertexShaderSource = "/home/zach/Git/NMT/3D-Graphics/opengl_museum/setup_environment/Glitter/Sources/vertex.shader";
+const char *fragmentShaderSource = "/home/zach/Git/NMT/3D-Graphics/opengl_museum/setup_environment/Glitter/Sources/fragment.shader";
+const char *modelSource = "/home/zach/Git/NMT/3D-Graphics/opengl_museum/setup_environment/Glitter/Sources/samich.obj";
 
 /******************************************************************************
 	GLOBAL VARIABLES
