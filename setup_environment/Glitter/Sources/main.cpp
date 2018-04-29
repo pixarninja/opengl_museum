@@ -18,19 +18,23 @@
 	Shader Set-up
 ******************************************************************************/
 
-const char *vertexShaderSource = "/home/zach/Git/NMT/3D-Graphics/opengl_museum/setup_environment/Glitter/Sources/vertex.shader";
-const char *fragmentShaderSource = "/home/zach/Git/NMT/3D-Graphics/opengl_museum/setup_environment/Glitter/Sources/fragment.shader";
-const char *modelSource = "/home/zach/Git/NMT/3D-Graphics/opengl_museum/setup_environment/Glitter/Sources/samich.obj";
+const char *vertexShaderSource = "/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Sources/vertex.shader";
+const char *fragmentShaderSource = "/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Sources/fragment.shader";
+const char *modelSource = "/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Sources/third_cut.obj";
 
 /******************************************************************************
 	GLOBAL VARIABLES
 ******************************************************************************/
 Camera camera;
-GLuint vao;
+double prevX;
+double prevY;
+bool init = true;
+double currTime = 0;
+double deltaTime = 0;
 
 // set up our window size
-const unsigned int SCR_WIDTH = 500;
-const unsigned int SCR_HEIGHT = 500;
+const unsigned int SCR_WIDTH = 700;
+const unsigned int SCR_HEIGHT = 700;
 
 /******************************************************************************
 	CALLBACKS
@@ -44,8 +48,15 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height){
 
 static void cursorPositionCallback( GLFWwindow *window, double xpos, double ypos )
 {
-    std::cout << xpos << " : " << ypos << std::endl;
-    camera.ProcessMouseMovement(xpos, ypos);
+    if (init) {
+        // need to initialize starting position, so first frame of input is not used
+        init = false;
+    } else {
+        // move camera based on changes in cursor position
+        camera.ProcessMouseMovement(xpos - prevX, prevY - ypos);
+    }
+    prevX = xpos;
+    prevY = ypos;
 }
 
 void scrollCallback( GLFWwindow *window, double xoffset, double yoffset )
@@ -64,16 +75,16 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         exit(EXIT_SUCCESS);
     if (key == GLFW_KEY_W && action == GLFW_PRESS) {
-        camera.ProcessKeyboard(FORWARD, 1);
+        camera.ProcessKeyboard(FORWARD, deltaTime);
     }
     if (key == GLFW_KEY_A && action == GLFW_PRESS) {
-        camera.ProcessKeyboard(LEFT, 1);
+        camera.ProcessKeyboard(LEFT, deltaTime);
     }
     if (key == GLFW_KEY_S && action == GLFW_PRESS) {
-        camera.ProcessKeyboard(BACKWARD, 1);
+        camera.ProcessKeyboard(BACKWARD, deltaTime);
     }
     if (key == GLFW_KEY_D && action == GLFW_PRESS) {
-        camera.ProcessKeyboard(RIGHT, 1);
+        camera.ProcessKeyboard(RIGHT, deltaTime);
     }
     if(glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS) {
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -122,6 +133,10 @@ int main(){
 
     glfwGetFramebufferSize(window, &framebufferWidth, &framebufferHeight);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    glfwSetKeyCallback(window, key_callback);
+    glfwSetMouseButtonCallback(window, mouse_button_callback);
+    glfwSetCursorPosCallback( window, cursorPositionCallback );
+    glfwSetScrollCallback( window, scrollCallback );
 
     // make the OpenGL context active
     // -----------------------------------------------------------------------
@@ -134,74 +149,44 @@ int main(){
         return -1;
     }
 
-    // call init()
-    // -----------------------------------------------------------------------
-    // create a vertex array object (vao)
-    glGenVertexArrays(1, &vao);
+    // initialize shader
+    Shader shader = Shader(vertexShaderSource, fragmentShaderSource);
+    // initialize camera
+    camera = Camera();
 
-    // initialize and use the shader we initialized globally
-    Shader shader(vertexShaderSource, fragmentShaderSource);
     shader.use();
+    glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+    glEnable(GL_DEPTH_TEST);
 
-    // do the same for the model
     Model model(modelSource);
 
-    glBindVertexArray(vao);
-    glClearColor(1.0, 1.0, 1.0, 1.0);
-
-    // set up the requirements for our key/mouse clicks
-    // -----------------------------------------------------------------------
-    glfwSetKeyCallback(window, key_callback);
-    glfwSetMouseButtonCallback(window, mouse_button_callback);
-    glfwSetCursorPosCallback( window, cursorPositionCallback );
-    glfwSetScrollCallback( window, scrollCallback );
-
-    unsigned char pixels[16 * 16 * 4];
+    unsigned char pixels[4 * 4 * 4];
     memset( pixels, 0xff, sizeof( pixels ) );
     GLFWimage image;
-    image.width = 16;
-    image.height = 16;
+    image.width = 4;
+    image.height = 4;
     image.pixels = pixels;
     GLFWcursor *cursor = glfwCreateCursor( &image, 0, 0 );
     glfwSetCursor( window, cursor ); // set to null to reset cursor
-
-    // set up the camera and view/projection matrices
-    // -----------------------------------------------------------------------
-    camera = Camera();
-
-    float fov = 90.f;
-    float nearPlane = 1.0f;
-    float farPlane = 100.f;
-    glm::mat4 ProjectionMatrix(1.f);
-
-    ProjectionMatrix = glm::perspective(
-            glm::radians(camera.Zoom),
-            (float) SCR_WIDTH / (float) SCR_HEIGHT,
-            nearPlane,
-            farPlane
-    );
-
-    /*INIT UNIFORMS */
-    glUseProgram(vao);
-
-    //glUniformMatrix4fv(glGetUniformLocation(vao, "model"), 1, GL_FALSE, glm::value_ptr(ModelMatrix));
-    glUniformMatrix4fv(glGetUniformLocation(vao, "view"), 1, GL_FALSE, glm::value_ptr(camera.GetViewMatrix()));
-    glUniformMatrix4fv(glGetUniformLocation(vao, "proj"), 1, GL_FALSE, glm::value_ptr(ProjectionMatrix));
-
-    cout << camera.GetViewMatrix()[0][0] << endl;
 
     // glfw uses a "closed event" loop, which means you only have to handle
     // events when you need to
     // -----------------------------------------------------------------------
     while(!glfwWindowShouldClose(window)){
-        //retrieve window events
-        glfwSwapBuffers(window);
+        double prevTime = currTime;
+        currTime = glfwGetTime();
+        deltaTime = currTime - prevTime;
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        shader.use();
+
+        glUniformMatrix4fv(glGetUniformLocation(shader.ID, "view"), 1, GL_FALSE, (float *)glm::value_ptr(camera.GetViewMatrix()));
+        glUniformMatrix4fv(glGetUniformLocation(shader.ID, "proj"), 1, GL_FALSE, (float *)glm::value_ptr(glm::perspective(glm::radians(camera.Zoom), (float) SCR_WIDTH / (float) SCR_HEIGHT, 0.1f, 100.0f)));
 
         // draw the currently loaded model
         model.Draw(shader);
 
+        glfwSwapBuffers(window);
         glfwPollEvents();
     }
 
