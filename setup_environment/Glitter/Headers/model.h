@@ -1,12 +1,12 @@
+// https://learnopengl.com/code_viewer_gh.php?code=includes/learnopengl/model.h
 #ifndef MODEL_H
 #define MODEL_H
-#define STB_IMAGE_IMPLEMENTATION
 
 #include <glad/glad.h>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <stb_image.h>
+#include <../Vendor/stb/stb_image.h>
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
@@ -24,7 +24,7 @@ using namespace std;
 
 unsigned int TextureFromFile(const char *path, const string &directory, bool gamma = false);
 
-class Model 
+class Model
 {
 public:
     /*  Model Data */
@@ -33,37 +33,28 @@ public:
     string directory;
     bool gammaCorrection;
 
-    // constructor
-    // ------------------------------------------------------------------------
-    Model() {};
-    // create model using filepath to a 3D model
-    // ------------------------------------------------------------------------
-    void create(string const &path, bool gamma = false)
+    /*  Functions   */
+    // constructor, expects a filepath to a 3D model.
+    Model(string const &path, bool gamma = false) : gammaCorrection(gamma)
     {
-        gammaCorrection = gamma;
         loadModel(path);
     }
+
     // draws the model, and thus all its meshes
-    // ------------------------------------------------------------------------
-    void draw(Shader shader)
+    void Draw(Shader shader)
     {
         for(unsigned int i = 0; i < meshes.size(); i++)
-            meshes[i].draw(shader);
+            meshes[i].Draw(shader);
     }
-    
+
 private:
+    /*  Functions   */
     // loads a model with supported ASSIMP extensions from file and stores the resulting meshes in the meshes vector.
-    // ------------------------------------------------------------------------
     void loadModel(string const &path)
     {
         // read file via ASSIMP
         Assimp::Importer importer;
-        const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate
-                                                       | aiProcess_OptimizeMeshes
-                                                       | aiProcess_JoinIdenticalVertices
-                                                       | aiProcess_Triangulate
-                                                       | aiProcess_CalcTangentSpace);
-                                                       //| aiProcess_FlipUVs);
+        const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_CalcTangentSpace);
         // check for errors
         if(!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) // if is Not Zero
         {
@@ -76,14 +67,14 @@ private:
         // process ASSIMP's root node recursively
         processNode(scene->mRootNode, scene);
     }
+
     // processes a node in a recursive fashion. Processes each individual mesh located at the node and repeats this process on its children nodes (if any).
-    // ------------------------------------------------------------------------
     void processNode(aiNode *node, const aiScene *scene)
     {
         // process each mesh located at the current node
         for(unsigned int i = 0; i < node->mNumMeshes; i++)
         {
-            // the node object only contains indices to index the actual objects in the scene. 
+            // the node object only contains indices to index the actual objects in the scene.
             // the scene contains all the data, node is just to keep stuff organized (like relations between nodes).
             aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
             meshes.push_back(processMesh(mesh, scene));
@@ -95,7 +86,7 @@ private:
         }
 
     }
-    // ------------------------------------------------------------------------
+
     Mesh processMesh(aiMesh *mesh, const aiScene *scene)
     {
         // data to fill
@@ -122,7 +113,7 @@ private:
             if(mesh->mTextureCoords[0]) // does the mesh contain texture coordinates?
             {
                 glm::vec2 vec;
-                // a vertex can contain up to 8 different texture coordinates. We thus make the assumption that we won't 
+                // a vertex can contain up to 8 different texture coordinates. We thus make the assumption that we won't
                 // use models where a vertex can have multiple texture coordinates so we always take the first set (0).
                 vec.x = mesh->mTextureCoords[0][i].x;
                 vec.y = mesh->mTextureCoords[0][i].y;
@@ -142,7 +133,7 @@ private:
             vertex.Bitangent = vector;
             vertices.push_back(vertex);
         }
-        // now walk through each of the mesh's faces (a face is a mesh its triangle) and retrieve the corresponding vertex indices.
+        // now wak through each of the mesh's faces (a face is a mesh its triangle) and retrieve the corresponding vertex indices.
         for(unsigned int i = 0; i < mesh->mNumFaces; i++)
         {
             aiFace face = mesh->mFaces[i];
@@ -151,49 +142,35 @@ private:
                 indices.push_back(face.mIndices[j]);
         }
         // process materials
-        if(mesh->mMaterialIndex >= 0) {
-            aiMaterial *material = scene->mMaterials[mesh->mMaterialIndex];
-            // we assume a convention for sampler names in the shaders. Each diffuse texture should be named
-            // as 'texture_diffuseN' where N is a sequential number ranging from 1 to MAX_SAMPLER_NUMBER.
-            // Same applies to other texture as the following list summarizes:
-            // diffuse: texture_diffuseN
-            // specular: texture_specularN
-            // normal: texture_normalN
+        aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
+        // we assume a convention for sampler names in the shaders. Each diffuse texture should be named
+        // as 'texture_diffuseN' where N is a sequential number ranging from 1 to MAX_SAMPLER_NUMBER.
+        // Same applies to other texture as the following list summarizes:
+        // diffuse: texture_diffuseN
+        // specular: texture_specularN
+        // normal: texture_normalN
 
-            // 1. diffuse maps
-            vector<Texture> diffuseMaps = loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
-            textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
-            // 2. specular maps
-            vector<Texture> specularMaps = loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
-            textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
-            // 3. normal maps
-            std::vector<Texture> normalMaps = loadMaterialTextures(material, aiTextureType_HEIGHT, "texture_normal");
-            textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
-            // 4. height maps
-            std::vector<Texture> heightMaps = loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height");
-            textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
-        }
-        
+        // 1. diffuse maps
+        vector<Texture> diffuseMaps = loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
+        textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
+        // 2. specular maps
+        vector<Texture> specularMaps = loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
+        textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
+        // 3. normal maps
+        std::vector<Texture> normalMaps = loadMaterialTextures(material, aiTextureType_HEIGHT, "texture_normal");
+        textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
+        // 4. height maps
+        std::vector<Texture> heightMaps = loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height");
+        textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
+
         // return a mesh object created from the extracted mesh data
         return Mesh(vertices, indices, textures);
     }
+
     // checks all material textures of a given type and loads the textures if they're not loaded yet.
     // the required info is returned as a Texture struct.
-    // ------------------------------------------------------------------------
     vector<Texture> loadMaterialTextures(aiMaterial *mat, aiTextureType type, string typeName)
     {
-        for (unsigned int i = 0; i < mat->mNumProperties;++i) {
-            aiMaterialProperty* prop = mat->mProperties[i];
-            char *mData = prop->mData;
-
-            if ( prop /* just a sanity check ... */
-                 && 0 == strcmp( prop->mKey.data, _AI_MATKEY_TEXTURE_BASE )
-                 && prop->mSemantic == type) {
-                ;
-            }
-        }
-
-
         vector<Texture> textures;
         for(unsigned int i = 0; i < mat->GetTextureCount(type); i++)
         {

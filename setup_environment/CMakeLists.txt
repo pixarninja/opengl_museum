@@ -43,8 +43,7 @@ include_directories(Glitter/Headers/
         Glitter/Vendor/stb/)
         #Glitter/Sources/src/)
 
-file(GLOB VENDORS_SOURCES Glitter/Vendor/stb/deprecated/stb_image.c)
-file(GLOB VENDORS_SOURCES Glitter/Vendor/glad/src/glad.c)
+file(GLOB VENDORS_SOURCES Glitter/Vendor/glad/src/glad.c Glitter/Vendor/stb/deprecated/stb_image.c)
 file(GLOB PROJECT_HEADERS Glitter/Headers/*.h*)
 file(GLOB PROJECT_SOURCES Glitter/Sources/*.cpp)
 file(GLOB PROJECT_SHADERS Glitter/Shaders/*.comp

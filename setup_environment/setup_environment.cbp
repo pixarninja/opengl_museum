@@ -875,6 +875,9 @@
 		<Unit filename="/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Headers/shader.h">
 			<Option target="setup_environment"/>
 		</Unit>
+		<Unit filename="/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Headers/stb_image.h">
+			<Option target="setup_environment"/>
+		</Unit>
 		<Unit filename="/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Sources/main.cpp">
 			<Option target="setup_environment"/>
 		</Unit>
@@ -4046,6 +4049,9 @@
 		</Unit>
 		<Unit filename="/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Vendor/glfw/src/xkb_unicode.h">
 			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Vendor/stb/deprecated/stb_image.c">
+			<Option target="setup_environment"/>
 		</Unit>
 		<Unit filename="/home/pixarninja/Git/opengl_museum/setup_environment/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
