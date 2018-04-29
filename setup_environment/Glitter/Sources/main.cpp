@@ -25,69 +25,12 @@ const char *modelSource = "/home/pixarninja/Git/opengl_museum/setup_environment/
 /******************************************************************************
 	GLOBAL VARIABLES
 ******************************************************************************/
-
 Camera camera;
-
-// Array of rotation angles (degrees) for each coordinate axis
-enum { Xaxis = 0, Yaxis = 1, Zaxis = 2, NumAxes = 3 };
-int Axis = Xaxis;
-
-GLfloat Theta[NumAxes] = { 0.0, 0.0, 0.0 };
 GLuint vao;
-Shader shader;
-Model model;
-Texture* gTexture = NULL;
-
-// the location of the "theta" shader uniform variable
-GLint theta;
 
 // set up our window size
 const unsigned int SCR_WIDTH = 500;
 const unsigned int SCR_HEIGHT = 500;
-
-/******************************************************************************
-	OPENGL INITIALIZATION
-******************************************************************************/
-void init() {
-    // create a vertex array object (vao)
-    glGenVertexArrays(1, &vao);
-
-    // initialize and use the shader we initialized globally
-    shader.create(vertexShaderSource, fragmentShaderSource);
-    shader.use();
-
-    // do the same for the model
-    model.create(modelSource);
-
-    glBindVertexArray(vao);
-    theta = glGetUniformLocation(shader.ID, "theta");
-
-    glEnable(GL_DEPTH_TEST);
-    glClearColor(1.0, 1.0, 1.0,1.0);
-
-} // end init()
-
-/******************************************************************************
-	DISPLAY LOADED OBJECT
-*******************************************************************************/
-void display() {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glUniform3fv(theta, 1, Theta);
-
-    // draw the currently loaded model
-    model.draw(shader);
-} // end display()
-
-/******************************************************************************
-	AXIS ROTATION
-******************************************************************************/
-void idle() {
-    Theta[Axis] += 0.5; // might try using 0.01 intervals
-
-    if (Theta[Axis] > 360.0) {
-        Theta[Axis] -= 360.0;
-    }
-} // end idle()
 
 /******************************************************************************
 	CALLBACKS
@@ -113,12 +56,7 @@ void scrollCallback( GLFWwindow *window, double xoffset, double yoffset )
 
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 {
-    if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)
-        Axis = Zaxis;
-    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
-        Axis = Xaxis;
-    if (button == GLFW_MOUSE_BUTTON_MIDDLE && action == GLFW_PRESS)
-        Axis = Yaxis;
+    ;
 }
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
@@ -198,7 +136,18 @@ int main(){
 
     // call init()
     // -----------------------------------------------------------------------
-    init();
+    // create a vertex array object (vao)
+    glGenVertexArrays(1, &vao);
+
+    // initialize and use the shader we initialized globally
+    Shader shader(vertexShaderSource, fragmentShaderSource);
+    shader.use();
+
+    // do the same for the model
+    Model model(modelSource);
+
+    glBindVertexArray(vao);
+    glClearColor(1.0, 1.0, 1.0, 1.0);
 
     // set up the requirements for our key/mouse clicks
     // -----------------------------------------------------------------------
@@ -248,8 +197,11 @@ int main(){
         //retrieve window events
         glfwSwapBuffers(window);
 
-        display();
-        idle();
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        // draw the currently loaded model
+        model.Draw(shader);
+
         glfwPollEvents();
     }
 
