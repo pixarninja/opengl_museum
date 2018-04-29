@@ -43,6 +43,18 @@ Task 1: Create an object loader that imports an object into OpenGL. The object r
 
 Task 2: Import a more complicated file. We chose to upload the obj file of our basic museum, and a model of a pikachu. We cycle through the files using the space bar.
 
-![object_loader](https://github.com/pixarninja/opengl_museum/blob/master/setup_environment/screenshots/ObjectLoaderMuseum.png)
+![object_loader_museum](https://github.com/pixarninja/opengl_museum/blob/master/setup_environment/screenshots/ObjectLoaderMuseum.png)
 
-![object_loader](https://github.com/pixarninja/opengl_museum/blob/master/setup_environment/screenshots/ObjectLoaderPikachu.png)
+![object_loader_pikachu](https://github.com/pixarninja/opengl_museum/blob/master/setup_environment/screenshots/ObjectLoaderPikachu.png)
+
+### 3/28/2018: Integrate Class Structure
+
+Task 1: Implement a driver using the classes provided to us. This is now complete, and a sample rendering of an object loaded in with the new driver is produced below.
+
+![driver](https://github.com/pixarninja/opengl_museum/blob/master/setup_environment/screenshots/Driver.png)
+
+### 4/4/2018: Integrate Textures
+
+Task 1: Add textures to the objects imported into OpenGL. We haven't perfected this yet, however we've managed to at least get the textures imported. Our next task is to ensure that the texture coordinates are being read correctly so that when we map textures on our museum, the UV coordinates match with how they are read in.
+
+![awkward_rock](https://github.com/pixarninja/opengl_museum/blob/master/setup_environment/screenshots/AwkwardRock.jpg)

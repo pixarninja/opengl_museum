@@ -27,6 +27,13 @@ else()
     endif()
 endif()
 
+#ADD_LIBRARY( soil STATIC
+#        ${PROJECT_SOURCE_DIR}/Glitter/Sources/src/image_helper.c
+#        ${PROJECT_SOURCE_DIR}/Glitter/Sources/src/stb_image_aug.c
+#        ${PROJECT_SOURCE_DIR}/Glitter/Sources/src/image_DXT.c
+#        ${PROJECT_SOURCE_DIR}/Glitter/Sources/src/SOIL.c
+#        )
+
 include_directories(Glitter/Headers/
         Glitter/Vendor/assimp/include/
         Glitter/Vendor/bullet/src/
@@ -34,7 +41,9 @@ include_directories(Glitter/Headers/
         Glitter/Vendor/glfw/include/
         Glitter/Vendor/glm/
         Glitter/Vendor/stb/)
+        #Glitter/Sources/src/)
 
+file(GLOB VENDORS_SOURCES Glitter/Vendor/stb/deprecated/stb_image.c)
 file(GLOB VENDORS_SOURCES Glitter/Vendor/glad/src/glad.c)
 file(GLOB PROJECT_HEADERS Glitter/Headers/*.h*)
 file(GLOB PROJECT_SOURCES Glitter/Sources/*.cpp)
