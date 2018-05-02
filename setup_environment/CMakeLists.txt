@@ -43,7 +43,8 @@ include_directories(Glitter/Headers/
         Glitter/Vendor/stb/)
         #Glitter/Sources/src/)
 
-file(GLOB VENDORS_SOURCES Glitter/Vendor/glad/src/glad.c Glitter/Vendor/stb/deprecated/stb_image.c)
+file(GLOB VENDORS_SOURCES Glitter/Vendor/glad/src/glad.c) #Glitter/Vendor/stb/deprecated/stb_image.c)
+link_directories(/usr/lib/SOIL)
 file(GLOB PROJECT_HEADERS Glitter/Headers/*.h*)
 file(GLOB PROJECT_SOURCES Glitter/Sources/*.cpp)
 file(GLOB PROJECT_SHADERS Glitter/Shaders/*.comp
@@ -68,6 +69,6 @@ add_executable(${PROJECT_NAME} ${PROJECT_SOURCES} ${PROJECT_HEADERS}
         ${VENDORS_SOURCES})
 target_link_libraries(${PROJECT_NAME} assimp glfw
         ${GLFW_LIBRARIES} ${GLAD_LIBRARIES}
-        BulletDynamics BulletCollision LinearMath)
+        BulletDynamics BulletCollision LinearMath SOIL)
 set_target_properties(${PROJECT_NAME} PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${PROJECT_NAME})

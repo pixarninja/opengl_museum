@@ -7,20 +7,29 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include <vector>
+#include <iostream>
 
 // Defines several possible options for camera movement. Used as abstraction to stay away from window-system specific input methods
 enum Camera_Movement {
     FORWARD,
     BACKWARD,
     LEFT,
-    RIGHT
+    RIGHT,
+    DOWN,
+    UP,
+    ROTRIGHT,
+    ROTLEFT,
+    ROTUP,
+    ROTDOWN,
+    TILTRIGHT,
+    TILTLEFT
 };
 
 // Default camera values
 const float YAW         = -90.0f;
 const float PITCH       =  0.0f;
 const float SPEED       =  1.0f;
-const float SENSITIVITY =  1.0f;
+const float SENSITIVITY =  0.05f;
 const float ZOOM        =  45.0f;
 
 
@@ -79,6 +88,90 @@ public:
             Position -= Right * velocity;
         if (direction == RIGHT)
             Position += Right * velocity;
+        if (direction == DOWN)
+            Position -= Up * velocity;
+        if (direction == UP)
+            Position += Up * velocity;
+        if (direction == ROTRIGHT) {
+            glm::mat4 rotationMat(1);
+            rotationMat = glm::rotate(rotationMat, -0.05f, WorldUp);
+
+            glm::vec4 positionVec(Front.x, Front.y, Front.z, 1.0);
+            Front = glm::vec3(rotationMat * positionVec);
+
+            glm::vec4 worldVec(WorldUp.x, WorldUp.y, WorldUp.z, 1.0);
+            WorldUp = glm::vec3(rotationMat * worldVec);
+
+            updateVectors();
+        }
+        if (direction == ROTLEFT) {
+            glm::mat4 rotationMat(1);
+            rotationMat = glm::rotate(rotationMat, 0.05f, WorldUp);
+
+            glm::vec4 positionVec(Front.x, Front.y, Front.z, 1.0);
+            Front = glm::vec3(rotationMat * positionVec);
+
+            glm::vec4 worldVec(WorldUp.x, WorldUp.y, WorldUp.z, 1.0);
+            WorldUp = glm::vec3(rotationMat * worldVec);
+
+            updateVectors();
+        }
+        /*if (direction == ROTRIGHT) {
+            Yaw += 1.0f;
+            updateCameraVectors();
+        }
+        if (direction == ROTLEFT) {
+            Yaw -= 1.0f;
+            updateCameraVectors();
+        }*/
+        if (direction == ROTUP) {
+            glm::mat4 rotationMat(1);
+            rotationMat = glm::rotate(rotationMat, 0.05f, Right);
+
+            glm::vec4 positionVec(Front.x, Front.y, Front.z, 1.0);
+            Front = glm::vec3(rotationMat * positionVec);
+
+            glm::vec4 worldVec(WorldUp.x, WorldUp.y, WorldUp.z, 1.0);
+            WorldUp = glm::vec3(rotationMat * worldVec);
+
+            updateVectors();
+        }
+        if (direction == ROTDOWN) {
+            glm::mat4 rotationMat(1);
+            rotationMat = glm::rotate(rotationMat, -0.05f, Right);
+
+            glm::vec4 positionVec(Front.x, Front.y, Front.z, 1.0);
+            Front = glm::vec3(rotationMat * positionVec);
+
+            glm::vec4 worldVec(WorldUp.x, WorldUp.y, WorldUp.z, 1.0);
+            WorldUp = glm::vec3(rotationMat * worldVec);
+
+            updateVectors();
+        }
+        if (direction == TILTRIGHT) {
+            glm::mat4 rotationMat(1);
+            rotationMat = glm::rotate(rotationMat, 0.05f, Front);
+
+            glm::vec4 positionVec(Front.x, Front.y, Front.z, 1.0);
+            Front = glm::vec3(rotationMat * positionVec);
+
+            glm::vec4 worldVec(WorldUp.x, WorldUp.y, WorldUp.z, 1.0);
+            WorldUp = glm::vec3(rotationMat * worldVec);
+
+            updateVectors();
+        }
+        if (direction == TILTLEFT) {
+            glm::mat4 rotationMat(1);
+            rotationMat = glm::rotate(rotationMat, -0.05f, Front);
+
+            glm::vec4 positionVec(Front.x, Front.y, Front.z, 1.0);
+            Front = glm::vec3(rotationMat * positionVec);
+
+            glm::vec4 worldVec(WorldUp.x, WorldUp.y, WorldUp.z, 1.0);
+            WorldUp = glm::vec3(rotationMat * worldVec);
+
+            updateVectors();
+        }
     }
 
     // Processes input received from a mouse input system. Expects the offset value in both the x and y direction.
@@ -125,6 +218,13 @@ private:
         front.z = sin(glm::radians(Yaw)) * cos(glm::radians(Pitch));
         Front = glm::normalize(front);
         // Also re-calculate the Right and Up vector
+        Right = glm::normalize(glm::cross(Front, WorldUp));  // Normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
+        Up    = glm::normalize(glm::cross(Right, Front));
+    }
+
+    void updateVectors()
+    {
+        // Rze-calculate the Right and Up vector
         Right = glm::normalize(glm::cross(Front, WorldUp));  // Normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
         Up    = glm::normalize(glm::cross(Right, Front));
     }
