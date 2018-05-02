@@ -20,12 +20,13 @@
 
 const char *vertexShaderSource = "/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Sources/vertex.shader";
 const char *fragmentShaderSource = "/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Sources/fragment.shader";
-const char *modelSource = "/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Sources/third_cut.obj";
+const char *modelSource = "/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Sources/fourth_cut.obj";
 
 /******************************************************************************
 	GLOBAL VARIABLES
 ******************************************************************************/
 Camera camera;
+Model model;
 double prevX;
 double prevY;
 bool init = true;
@@ -33,8 +34,8 @@ double currTime = 0;
 double deltaTime = 0;
 
 // set up our window size
-const unsigned int SCR_WIDTH = 700;
-const unsigned int SCR_HEIGHT = 700;
+unsigned int SCR_WIDTH = 700;
+unsigned int SCR_HEIGHT = 700;
 
 /******************************************************************************
 	CALLBACKS
@@ -48,15 +49,17 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height){
 
 static void cursorPositionCallback( GLFWwindow *window, double xpos, double ypos )
 {
+    std::cout << xpos << ", " << ypos << std::endl;
     if (init) {
         // need to initialize starting position, so first frame of input is not used
+        //glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
         init = false;
     } else {
         // move camera based on changes in cursor position
-        camera.ProcessMouseMovement(xpos - prevX, prevY - ypos);
+        camera.ProcessMouseMovement((SCR_WIDTH / 100) * xpos - prevX, prevY - (SCR_HEIGHT / 150) * ypos);
     }
-    prevX = xpos;
-    prevY = ypos;
+    prevX = (SCR_WIDTH / 100) * xpos;
+    prevY = (SCR_HEIGHT / 150) * ypos;
 }
 
 void scrollCallback( GLFWwindow *window, double xoffset, double yoffset )
@@ -74,16 +77,16 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 {
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         exit(EXIT_SUCCESS);
-    if (key == GLFW_KEY_W && action == GLFW_PRESS) {
+    if (key == GLFW_KEY_N) {
         camera.ProcessKeyboard(FORWARD, deltaTime);
     }
-    if (key == GLFW_KEY_A && action == GLFW_PRESS) {
+    if (key == GLFW_KEY_A) {
         camera.ProcessKeyboard(LEFT, deltaTime);
     }
-    if (key == GLFW_KEY_S && action == GLFW_PRESS) {
+    if (key == GLFW_KEY_M) {
         camera.ProcessKeyboard(BACKWARD, deltaTime);
     }
-    if (key == GLFW_KEY_D && action == GLFW_PRESS) {
+    if (key == GLFW_KEY_D) {
         camera.ProcessKeyboard(RIGHT, deltaTime);
     }
     if(glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS) {
@@ -94,6 +97,42 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     }
     if(glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS) {
         glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
+    }
+    if(key == GLFW_KEY_S) {
+        camera.ProcessKeyboard(DOWN, deltaTime);
+    }
+    if(key == GLFW_KEY_W) {
+        camera.ProcessKeyboard(UP, deltaTime);
+    }
+    if(key == GLFW_KEY_RIGHT) {
+        camera.ProcessKeyboard(ROTRIGHT, deltaTime);
+    }
+    if(key == GLFW_KEY_LEFT) {
+        camera.ProcessKeyboard(ROTLEFT, deltaTime);
+    }
+    if(key == GLFW_KEY_UP) {
+        camera.ProcessKeyboard(ROTUP, deltaTime);
+    }
+    if(key == GLFW_KEY_DOWN) {
+        camera.ProcessKeyboard(ROTDOWN, deltaTime);
+    }
+    if(key == GLFW_KEY_PERIOD) {
+        camera.ProcessKeyboard(TILTRIGHT, deltaTime);
+    }
+    if(key == GLFW_KEY_COMMA) {
+        camera.ProcessKeyboard(TILTLEFT, deltaTime);
+    }
+    if(glfwGetKey(window, GLFW_KEY_0) == GLFW_PRESS) {
+        model = Model("/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Sources/fourth_cut.obj");
+    }
+    if(glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
+        model = Model("/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Sources/third_cut.obj");
+    }
+    if(glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS) {
+        model = Model("/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Sources/cube3.obj");
+    }
+    if(glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS) {
+        model = Model("/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Sources/pikachu.obj");
     }
 }
 
@@ -120,9 +159,13 @@ int main(){
 
     // create a window
     // -----------------------------------------------------------------------
+    const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+    SCR_WIDTH = mode->width;
+    SCR_HEIGHT = mode->height;
     GLFWwindow* window =
             glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT,
                              "Harris_Harris Object Viewer",
+                             //glfwGetPrimaryMonitor(), nullptr
                              nullptr, nullptr
             );
     if(window == nullptr){
@@ -131,16 +174,17 @@ int main(){
         return -1;
     }
 
+    // make the OpenGL context active
+    // -----------------------------------------------------------------------
+    glfwMakeContextCurrent(window);
+
     glfwGetFramebufferSize(window, &framebufferWidth, &framebufferHeight);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetKeyCallback(window, key_callback);
     glfwSetMouseButtonCallback(window, mouse_button_callback);
-    glfwSetCursorPosCallback( window, cursorPositionCallback );
+    //glfwSetCursorPosCallback( window, cursorPositionCallback );
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
     glfwSetScrollCallback( window, scrollCallback );
-
-    // make the OpenGL context active
-    // -----------------------------------------------------------------------
-    glfwMakeContextCurrent(window);
 
     // glad: load all OpenGL function pointers
     // ---------------------------------------
@@ -151,14 +195,14 @@ int main(){
 
     // initialize shader
     Shader shader = Shader(vertexShaderSource, fragmentShaderSource);
+    shader.use();
     // initialize camera
     camera = Camera();
 
-    shader.use();
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     glEnable(GL_DEPTH_TEST);
 
-    Model model(modelSource);
+    model = Model(modelSource);
 
     unsigned char pixels[4 * 4 * 4];
     memset( pixels, 0xff, sizeof( pixels ) );
@@ -182,6 +226,11 @@ int main(){
 
         glUniformMatrix4fv(glGetUniformLocation(shader.ID, "view"), 1, GL_FALSE, (float *)glm::value_ptr(camera.GetViewMatrix()));
         glUniformMatrix4fv(glGetUniformLocation(shader.ID, "proj"), 1, GL_FALSE, (float *)glm::value_ptr(glm::perspective(glm::radians(camera.Zoom), (float) SCR_WIDTH / (float) SCR_HEIGHT, 0.1f, 100.0f)));
+
+        glUniformMatrix4fv(glGetUniformLocation(shader.ID, "ambient"), 1, GL_FALSE, (float *)glm::value_ptr(glm::vec4((1.0f, 1.0f, 1.0f))));
+        glUniformMatrix4fv(glGetUniformLocation(shader.ID, "diffuse"), 1, GL_FALSE, (float *)glm::value_ptr(glm::vec4((0.9f, 0.9f, 0.9f))));
+        glUniformMatrix4fv(glGetUniformLocation(shader.ID, "position"), 1, GL_FALSE, (float *)glm::value_ptr(camera.Position));
+        glUniformMatrix4fv(glGetUniformLocation(shader.ID, "direction"), 1, GL_FALSE, (float *)glm::value_ptr(camera.Front));
 
         // draw the currently loaded model
         model.Draw(shader);
