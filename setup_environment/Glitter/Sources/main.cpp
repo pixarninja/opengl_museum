@@ -20,7 +20,7 @@
 
 const char *vertexShaderSource = "/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Sources/vertex.shader";
 const char *fragmentShaderSource = "/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Sources/fragment.shader";
-const char *modelSource = "/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Sources/fourth_cut.obj";
+const char *modelSource = "/home/pixarninja/Git/opengl_museum/setup_environment/Glitter/Sources/testRickHouse.obj";
 
 /******************************************************************************
 	GLOBAL VARIABLES
@@ -226,11 +226,6 @@ int main(){
 
         glUniformMatrix4fv(glGetUniformLocation(shader.ID, "view"), 1, GL_FALSE, (float *)glm::value_ptr(camera.GetViewMatrix()));
         glUniformMatrix4fv(glGetUniformLocation(shader.ID, "proj"), 1, GL_FALSE, (float *)glm::value_ptr(glm::perspective(glm::radians(camera.Zoom), (float) SCR_WIDTH / (float) SCR_HEIGHT, 0.1f, 100.0f)));
-
-        glUniformMatrix4fv(glGetUniformLocation(shader.ID, "ambient"), 1, GL_FALSE, (float *)glm::value_ptr(glm::vec4((1.0f, 1.0f, 1.0f))));
-        glUniformMatrix4fv(glGetUniformLocation(shader.ID, "diffuse"), 1, GL_FALSE, (float *)glm::value_ptr(glm::vec4((0.9f, 0.9f, 0.9f))));
-        glUniformMatrix4fv(glGetUniformLocation(shader.ID, "position"), 1, GL_FALSE, (float *)glm::value_ptr(camera.Position));
-        glUniformMatrix4fv(glGetUniformLocation(shader.ID, "direction"), 1, GL_FALSE, (float *)glm::value_ptr(camera.Front));
 
         // draw the currently loaded model
         model.Draw(shader);

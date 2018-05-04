@@ -5,6 +5,7 @@ in vec2 vertTexCoord;
 in vec3 tangent;
 in vec3 biTangent;
 
+out vec3 outColor;
 out vec2 fragTexCoord;
 
 uniform mat4 view;

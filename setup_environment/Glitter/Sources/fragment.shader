@@ -7,7 +7,7 @@ out vec4 color; // output color of the pixel
 
 void main() {
 
-    vec2 updatedTexCoord = vec2(fragTexCoord.x * 0.5, fragTexCoord.y * 0.5);
+    vec2 updatedTexCoord = vec2(fragTexCoord.x, fragTexCoord.y);
     color = texture(texture_diffuse1, updatedTexCoord);
 
 }
