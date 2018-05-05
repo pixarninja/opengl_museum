@@ -58,3 +58,44 @@ Task 1: Implement a driver using the classes provided to us. This is now complet
 Task 1: Add textures to the objects imported into OpenGL. We haven't perfected this yet, however we've managed to at least get the textures imported. Our next task is to ensure that the texture coordinates are being read correctly so that when we map textures on our museum, the UV coordinates match with how they are read in.
 
 ![awkward_rock](https://github.com/pixarninja/opengl_museum/blob/master/setup_environment/screenshots/AwkwardRock.jpg)
+
+### 5/4/2018
+
+We have pushed our final code and created submission folders. The project (mysteriously) does not display textures correctly. We theorize that it has to do with how the objects are being exported. We will try to look at this later, however we can't correct it before the final project deadline.
+
+### Running The Project
+
+If you would like to run the project, load the setup_environment project folder into CLion and run it from the IDE. The camera is working and can be operated using the following keys:
+
+- "a", move the camera left (in the -X direction)
+- "d", move the camera right (in the +X direction)
+- "s", move the camera down (in the -Y direction)
+- "w", move the camera up (in the +Y direction)
+- "n", move the camera forward (in the -Z direction)
+- "m", move the camera forward (in the +Z direction)
+- "left arrow", rotate the camera left (about the Y axis counter-clockwise)
+- "right arrow", rotate the camera right (about the Y axis clockwise)
+- "down arrow", rotate the camera down (about the X axis counter-clockwise)
+- "up arrow", rotate the camera up (about the X axis clockwise)
+- ",", rotate the camera clockwise (about the Z axis)
+- ".", rotate the camera counter-clockwise (about the Z axis)
+
+Below are screenshots of the final blender model, completely texture mapped with baked lighting.
+
+![final_1](https://github.com/pixarninja/opengl_museum/blob/master/setup_environment/screenshots/final_1.png)
+
+![final_2](https://github.com/pixarninja/opengl_museum/blob/master/setup_environment/screenshots/final_2.png)
+
+![final_3](https://github.com/pixarninja/opengl_museum/blob/master/setup_environment/screenshots/final_3.png)
+
+![final_4](https://github.com/pixarninja/opengl_museum/blob/master/setup_environment/screenshots/final_4.png)
+
+![final_5](https://github.com/pixarninja/opengl_museum/blob/master/setup_environment/screenshots/final_5.png)
+
+![final_6](https://github.com/pixarninja/opengl_museum/blob/master/setup_environment/screenshots/final_6.png)
+
+![final_7](https://github.com/pixarninja/opengl_museum/blob/master/setup_environment/screenshots/final_7.png)
+
+### Future Work
+
+We would like to correct the mistakes that still persist, possibly by creating lighting in opengl instead of relying on baked textures. We would also like to make it more of a "game" by adding limitations to where the user can move. These may or may not be completed in the future.
